@@ -15,7 +15,7 @@ internal class DetailViewController: UIViewController {
     var snap = UIView()
     var card: Card!
     weak var delegate: CardDelegate?
-    var isFullscreen = false {
+    var isFullscreen = true {
         didSet { scrollViewOriginalYPosition = isFullscreen ? 0 : 40 }
     }
     
@@ -112,9 +112,13 @@ internal class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.cardWillCloseDetailView?(card: self.card)
-        detailView?.alpha = 0
+        /// detailView?.alpha = 0
         snap.removeFromSuperview()
         xButton.removeFromSuperview()
+        UIView.animate(withDuration: 0.8, animations: {
+            self.card.backgroundIV.layer.opacity = 1.0
+            self.detailView?.alpha = 0
+        })
         super.viewWillDisappear(animated)
     }
     

@@ -228,7 +228,10 @@ import UIKit
     
     private func shrinkAnimated() {
         
-        UIView.animate(withDuration: 0.2, animations: { self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95) })
+        UIView.animate(withDuration: 0.2, animations: {
+            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            self.detailVC.card.backgroundIV.layer.opacity = 0.0
+        })
     }
     
     private func resetAnimated() {
